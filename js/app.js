@@ -156,3 +156,46 @@ let inputFilterType = document.getElementById("filter-type");
 inputFilterType.addEventListener("input", function () {
   filterByType(inputFilterType.value)
 });
+
+// CÓDIGO PARA CLASSIFICAÇÃO
+function sortBy(type) {
+  let dbSorted = "";
+  if (type === 'melhor') {
+    dbSorted = db.sort((a, b) => b.rating - a.rating);
+  } else if (type === 'maior') {
+    dbSorted = db.sort((a, b) => b.price - a.price);
+  } else if (type === 'menor') {
+    dbSorted = db.sort((a, b) => a.price - b.price);
+  } else if (type === 'az') {
+    dbSorted = db.sort((a, b) => {
+      const nameA = a.name.toUpperCase();
+      const nameB = b.name.toUpperCase();
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+      return 0;
+    });
+  } else if (type === 'za') {
+    dbSorted = db.sort((a, b) => {
+      const nameA = a.name.toUpperCase();
+      const nameB = b.name.toUpperCase();
+      if (nameA > nameB) {
+        return -1;
+      }
+      if (nameA < nameB) {
+        return 1;
+      }
+      return 0;
+    });
+  }
+  products(dbSorted);
+}
+
+let inputSortType = document.getElementById("sort-type");
+
+inputSortType.addEventListener("input", function () {
+  sortBy(inputSortType.value)
+});
