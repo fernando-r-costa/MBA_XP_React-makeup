@@ -23,7 +23,7 @@ let allBrands = "";
 let allProductTypes = "";
 
 async function fetchDB() {
-  db = await fetchJson(`http://makeup-api.herokuapp.com/api/v1/products.json`);
+  db = await fetchJson(`https://makeup-api.herokuapp.com/api/v1/products.json`);
   let dbSortRating = db.sort((a, b) => b.rating - a.rating);
   allBrands = getValues(db, 'brand');
   allProductTypes = getValues(db, 'product_type');
